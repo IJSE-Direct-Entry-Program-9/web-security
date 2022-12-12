@@ -14,6 +14,13 @@ public class CorsFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
+        res.setHeader("Access-Control-Allow-Headers", "Authorization");
+
+        if (req.getMethod().equalsIgnoreCase("OPTIONS")){
+            return;
+        }
+
         chain.doFilter(req, res);
     }
 }
